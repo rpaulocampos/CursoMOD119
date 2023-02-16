@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CursoMOD119.Models.StockMovement>
+
+@{
+    ViewData["Title"] = "Index";
+    var x = Model;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">@Localizer["Create new"]</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MovementDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovementDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.ID)
+                -
+                @Html.DisplayFor(modelItem => item.Item.Name)
+            </td>
+            <td>
+@*                    <a asp-action="Edit" asp-route-id="@item.ID">@Localizer["Edit"]</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">@Localizer["Details"]</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">@Localizer["Delete"]</a>
+            </td>*@
+            <partial name ="_CRUD_actions" model="item.ID">
+        </tr>
+}
+    </tbody>
+</table>
