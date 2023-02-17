@@ -1,6 +1,6 @@
 ﻿using CursoMOD119.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CursoMOD119.Data
 {
@@ -13,5 +13,6 @@ namespace CursoMOD119.Data
 
         public DbSet<Item> Items { get; set; } = default!;
         public DbSet<StockMovement> StockMovements { get; set; } = default!;
+        public DbSet<Sale> Sales { get; set; } = default!;
     }
 }

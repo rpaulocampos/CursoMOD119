@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CursoMOD119.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230202213847_ItemCreation")]
-    partial class ItemCreation
+    [Migration("20230216214841_Sale_Creation")]
+    partial class SaleCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,67 @@ namespace CursoMOD119.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("CursoMOD119.Models.Sale", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("money");
+
+                    b.Property<DateTime>("SaleDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Sales");
+                });
+
+            modelBuilder.Entity("CursoMOD119.Models.StockMovement", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ItemID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("MovementDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Type")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ItemID");
+
+                    b.ToTable("StockMovements");
+                });
+
+            modelBuilder.Entity("ItemSale", b =>
+                {
+                    b.Property<int>("ItemsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalesID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemsID", "SalesID");
+
+                    b.HasIndex("SalesID");
+
+                    b.ToTable("ItemSale");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -251,6 +312,32 @@ namespace CursoMOD119.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("CursoMOD119.Models.StockMovement", b =>
+                {
+                    b.HasOne("CursoMOD119.Models.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("ItemSale", b =>
+                {
+                    b.HasOne("CursoMOD119.Models.Item", null)
+                        .WithMany()
+                        .HasForeignKey("ItemsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CursoMOD119.Models.Sale", null)
+                        .WithMany()
+                        .HasForeignKey("SalesID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -18,5 +18,8 @@ namespace CursoMOD119.Models
         public DateTime CreationDate { get; set; }
         [Display(Name = "Discontinued")]
         public bool Discontinued { get; set; }
+
+        [Display(Name = "Sales")]
+        public ICollection<Sale> Sales { get; set; }
     }
 }

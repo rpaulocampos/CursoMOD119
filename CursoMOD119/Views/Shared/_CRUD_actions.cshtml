@@ -1,6 +1,10 @@
 ﻿@model int
 
-<a asp-action="Edit" asp-route-id="@Model">@Localizer["Edit"]</a> |
-<a asp-action="Details" asp-route-id="@Model">@Localizer["Details"]</a> |
-<a asp-action="Delete" asp-route-id="@Model">@Localizer["Delete"]</a>
+<a class ="btn btn-primary" asp-action="Edit" asp-route-id="@Model">@Localizer["Edit"] </a> |
+<a class="btn btn-warning" asp-action="Details" asp-route-id="@Model">@Localizer["Details"]</a> |
+<a class="btn btn-danger asp-action="Delete" asp-route-id="@Model">@Localizer["Delete"]</a>
+
+
+
+@*<button type="button" class="btn btn-primary">Primary</button>*@
 

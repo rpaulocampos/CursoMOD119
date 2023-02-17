@@ -3,13 +3,13 @@
 @model IEnumerable<CursoMOD119.Models.Item>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = @Localizer["Index"];
 }
 
-<h1>Index</h1>
+<h1>@Localizer["Index"]</h1>
 
 <p>
-    <a asp-action="Create">@Localizer["Create new"]</a>
+    <a class="btn btn-info"  asp-action="Create">@Localizer["Create new"]</a>
 </p>
 <table class="table">
     <thead>

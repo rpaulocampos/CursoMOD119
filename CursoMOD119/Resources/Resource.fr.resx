@@ -141,6 +141,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Éditer</value>
   </data>
+  <data name="Index" xml:space="preserve">
+    <value>Indice</value>
+  </data>
   <data name="Item" xml:space="preserve">
     <value>Article</value>
   </data>
@@ -162,7 +165,16 @@
   <data name="Price" xml:space="preserve">
     <value>Prix</value>
   </data>
+  <data name="Privacy Policy" xml:space="preserve">
+    <value>Politique de confidentialité</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Enregistrer</value>
+  </data>
+  <data name="Use this page to detail your site's privacy policy" xml:space="preserve">
+    <value>Utilisez cette page pour détailler la politique de confidentialité de votre site</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Bienvenue</value>
   </data>
 </root>

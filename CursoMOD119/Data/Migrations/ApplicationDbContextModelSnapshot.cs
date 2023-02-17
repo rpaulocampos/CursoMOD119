@@ -48,6 +48,25 @@ namespace CursoMOD119.Data.Migrations
                     b.ToTable("Items");
                 });
 
+            modelBuilder.Entity("CursoMOD119.Models.Sale", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("money");
+
+                    b.Property<DateTime>("SaleDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Sales");
+                });
+
             modelBuilder.Entity("CursoMOD119.Models.StockMovement", b =>
                 {
                     b.Property<int>("ID")
@@ -73,6 +92,21 @@ namespace CursoMOD119.Data.Migrations
                     b.HasIndex("ItemID");
 
                     b.ToTable("StockMovements");
+                });
+
+            modelBuilder.Entity("ItemSale", b =>
+                {
+                    b.Property<int>("ItemsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SalesID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemsID", "SalesID");
+
+                    b.HasIndex("SalesID");
+
+                    b.ToTable("ItemSale");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -286,6 +320,21 @@ namespace CursoMOD119.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("ItemSale", b =>
+                {
+                    b.HasOne("CursoMOD119.Models.Item", null)
+                        .WithMany()
+                        .HasForeignKey("ItemsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CursoMOD119.Models.Sale", null)
+                        .WithMany()
+                        .HasForeignKey("SalesID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
